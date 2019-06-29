@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="guide"
+                type="com.bogdanbele.planday.model.Guide" />
+    </data>
+
+    <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="4dp">
+
+            <android.support.constraint.ConstraintLayout
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="400dp"
+                    android:layout_height="400dp">
+
+                <ImageView
+                        android:id="@+id/cover"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:src="#FFD"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                        android:id="@+id/start_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        android:text="@{guide.startDate}"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        app:layout_constraintTop_toBottomOf="@id/cover"
+                        app:layout_constraintBottom_toTopOf="@id/divider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="24.09.16"/>
+
+                <View
+                        android:id="@+id/divider"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:backgroundTint="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="@id/start_date"
+                        app:layout_constraintStart_toStartOf="@id/start_date"
+                        app:layout_constraintBottom_toTopOf="@id/end_date"
+                        app:layout_constraintTop_toBottomOf="@id/start_date"
+                        android:background="@drawable/vertical_dotted_line"/>
+
+
+                <TextView
+                        android:id="@+id/end_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="@{guide.endDate}"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        app:layout_constraintTop_toBottomOf="@id/divider"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="24.11.16"/>
+
+
+                <TextView
+                        android:id="@+id/name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="@{guide.name}"
+                        tools:text="Biomedical Basis of Elite Performance 2016"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginEnd="10dp"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/start_date"
+                        app:layout_constraintTop_toBottomOf="@id/cover"/>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+    </FrameLayout>
+
+</layout>
