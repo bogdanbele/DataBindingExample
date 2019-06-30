@@ -3,8 +3,7 @@ package com.bogdanbele.planday
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.bogdanbele.planday.api.AppApi
-import com.bogdanbele.planday.core.ApiResponse
-import com.bogdanbele.planday.core.ApiSuccessResponse
+import com.bogdanbele.planday.framework.ApiResponse
 import com.bogdanbele.planday.model.GuidesResponse
 
 class MainActivityViewModel : ViewModel() {
@@ -17,8 +16,5 @@ class MainActivityViewModel : ViewModel() {
                 guideList.postValue(liveData)
             }
         }
-
     }
-
-
 }

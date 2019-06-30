@@ -4,18 +4,13 @@ import android.app.Application
 import android.content.Context
 import com.bogdanbele.planday.MainActivityViewModel
 import com.bogdanbele.planday.api.AppApi
-import com.bogdanbele.planday.api.GuidesApi
 import dagger.Module
-import javax.inject.Singleton
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class ApplicationModule {
     lateinit var application: Application
-
-    fun ApplicationModule(application: Application){
-        this.application = application
-    }
 
     @Provides
     fun getViewModel(): MainActivityViewModel = MainActivityViewModel()
