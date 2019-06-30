@@ -1,1 +1,1 @@
-# planday_test
+# Planday Tech Challenge
