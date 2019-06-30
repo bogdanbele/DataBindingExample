@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
             if(data is ApiSuccessResponse<GuidesResponse>){
                 val items = data.body.data
                 binding.recylcerView.adapter = GuidesAdapter(items)
-
             }
         }
         binding.executePendingBindings()
