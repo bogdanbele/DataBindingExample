@@ -7,8 +7,11 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.bogdanbele.planday.api.AppApi
 import com.bogdanbele.planday.core.ApiResponse
+import com.bogdanbele.planday.core.ApiSuccessResponse
 import com.bogdanbele.planday.databinding.ActivityMainBinding
 import com.bogdanbele.planday.framework.BaseApplication
 import com.bogdanbele.planday.model.Guide
@@ -19,37 +22,32 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    private var viewModelProvider: ViewModelProvider? = null
-
     @Inject
     lateinit var mainActivityViewModel: MainActivityViewModel
 
     @Inject
     lateinit var appApi: AppApi
 
-    private val guideList = MutableLiveData<ApiResponse<GuidesResponse>>()
-
-    val guidesObserver: Observer<List<Guide>> = Observer { reseponse ->
-        baseContext.let {
-            val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-            binding.executePendingBindings()
-            binding.recylcerView.adapter = reseponse?.let { it1 -> GuidesAdapter(it1) }
-        }
-    }
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(toolbar)
+
         getBaseApplication().applicationComponent.inject(this)
 
-
         mainActivityViewModel.getGuides(appApi)
-        
+        binding.recylcerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+
+        mainActivityViewModel.guideList.observeForever {
+            val data = it
+            if(data is ApiSuccessResponse<GuidesResponse>){
+                val items = data.body.data
+                binding.recylcerView.adapter = GuidesAdapter(items)
+
+            }
+        }
+        binding.executePendingBindings()
 
 
         fab.setOnClickListener { view ->
